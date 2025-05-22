@@ -23,22 +23,22 @@ class MangaWeeklyCalendar {
     ];
 
     public function __construct() {
-        // Admin
+        
         add_action('admin_menu', [$this, 'admin_menu']);
         add_action('admin_enqueue_scripts', [$this, 'admin_assets']);
         add_action('wp_ajax_save_manga_day', [$this, 'save_manga_day']);
         
-        // Frontend
+        
         add_shortcode('manga_weekly', [$this, 'render_calendar']);
         add_action('wp_enqueue_scripts', [$this, 'frontend_assets']);
         
-        // Görsel Düzenlemeler
+       
         add_action('admin_head', [$this, 'admin_styles']);
         add_action('wp_head', [$this, 'frontend_styles']);
         add_action('admin_footer', [$this, 'admin_scripts']);
     }
 
-    // 1. ADMIN PANELİ
+    
     public function admin_menu() {
         add_menu_page(
             'Manga Günleri',
@@ -94,7 +94,7 @@ class MangaWeeklyCalendar {
         <?php
     }
 
-    // 2. VERİ İŞLEMLERİ
+    
     public function save_manga_day() {
         check_ajax_referer($this->nonce_key, 'nonce');
         
@@ -107,7 +107,7 @@ class MangaWeeklyCalendar {
         wp_send_json_success('Güncellendi!');
     }
 
-    // 3. FRONTEND TAKVİM
+    
     public function render_calendar() {
         ob_start(); ?>
         <div class="weekly-calendar">
@@ -153,7 +153,7 @@ class MangaWeeklyCalendar {
         ]);
     }
 
-    // 4. STİL VE SCRİPTLER
+    
     public function admin_styles() { ?>
         <style>
             .manga-list-container {
