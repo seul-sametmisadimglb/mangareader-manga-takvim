@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: MangaReader Takvim Haftalık
-Description: Haftanın günlerine göre manga takvimi + Durum etiketleri
+Description: Haftanın günlerine göre manga takvimi
 Version: 7.0
 Author: Seul
 */
@@ -23,22 +23,22 @@ class MangaWeeklyCalendar {
     ];
 
     public function __construct() {
-        // Admin
+        
         add_action('admin_menu', [$this, 'admin_menu']);
         add_action('admin_enqueue_scripts', [$this, 'admin_assets']);
         add_action('wp_ajax_save_manga_day', [$this, 'save_manga_day']);
         
-        // Frontend
+        
         add_shortcode('manga_weekly', [$this, 'render_calendar']);
         add_action('wp_enqueue_scripts', [$this, 'frontend_assets']);
         
-        // Görsel Düzenlemeler
+        
         add_action('admin_head', [$this, 'admin_styles']);
         add_action('wp_head', [$this, 'frontend_styles']);
         add_action('admin_footer', [$this, 'admin_scripts']);
     }
 
-    // 1. ADMIN PANELİ
+    
     public function admin_menu() {
         add_menu_page(
             'Manga Günleri',
@@ -94,7 +94,7 @@ class MangaWeeklyCalendar {
         <?php
     }
 
-    // 2. VERİ İŞLEMLERİ
+    
     public function save_manga_day() {
         check_ajax_referer($this->nonce_key, 'nonce');
         
@@ -107,7 +107,7 @@ class MangaWeeklyCalendar {
         wp_send_json_success('Güncellendi!');
     }
 
-    // 3. FRONTEND TAKVİM
+    
     public function render_calendar() {
         ob_start(); ?>
         <div class="weekly-calendar">
@@ -153,7 +153,7 @@ class MangaWeeklyCalendar {
         ]);
     }
 
-    // 4. STİL VE SCRİPTLER
+    
     public function admin_styles() { ?>
         <style>
             .manga-list-container {
@@ -184,7 +184,7 @@ class MangaWeeklyCalendar {
 
     public function frontend_styles() { ?>
         <style>
-            /* DURUM ETİKETLERİ */
+            
             .manga-status-container {
                 position: relative;
                 width: 100%;
@@ -206,7 +206,7 @@ class MangaWeeklyCalendar {
             .status-ertelendi { background: #f39c12; color: #fff; }
             .status-iptal { background: #e74c3c; color: #fff; }
 
-            /* DİĞER STİLLER */
+            
             .weekly-calendar {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -215,7 +215,7 @@ class MangaWeeklyCalendar {
                 background: #0a0a0a;
             }
     
-            /* MANGALAR İÇİN KUTULAR */
+            
             .manga-card {
                 background: #111;
                 border-radius: 8px;
@@ -224,10 +224,10 @@ class MangaWeeklyCalendar {
                 display: flex;
                 flex-direction: column;
                 min-height: 220px;
-                margin-bottom: 15px;/* Sabit minimum yükseklik */
+                margin-bottom: 15px;
             }
     
-            /* RESİM KONTEYNIRI */
+           
             .image-container {
                 width: 100%;
                 height: 120px;
@@ -237,7 +237,7 @@ class MangaWeeklyCalendar {
                 align-items: center;
             }
     
-            /* RESİMLER */
+           
             .manga-cover {
                 width: 90px;
                 height: 120px;
@@ -246,7 +246,7 @@ class MangaWeeklyCalendar {
                 border: 1px solid #333;
             }
     
-            /* METİN ALANI */
+           
             .manga-info {
                 flex: 1;
                 display: flex;
@@ -266,7 +266,7 @@ class MangaWeeklyCalendar {
                 overflow: hidden;
             }
     
-            /* BUTON */
+            
             .read-button {
                 display: block;
                 background: #e74c3c;
@@ -276,7 +276,7 @@ class MangaWeeklyCalendar {
                 border-radius: 4px;
                 text-align: center;
                 text-decoration: none;
-                margin-top: auto; /* Butonu en alta sabitle */
+                margin-top: auto; 
                 border: none;
                 transition: background 0.2s;
             }
@@ -285,7 +285,7 @@ class MangaWeeklyCalendar {
                 background: #c0392b;
             }
     
-            /* GÜN BAŞLIKLARI */
+           
             .day-title {
                 color: #fff;
                 font-size: 14px;
